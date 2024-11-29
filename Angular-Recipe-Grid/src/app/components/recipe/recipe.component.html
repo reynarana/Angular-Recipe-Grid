@@ -1,0 +1,32 @@
+<nav class="navbar">
+  <div class="navbar__brand">RECIPE</div>
+</nav>
+<div class="recipe-grid" [class]="'recipe-grid--' + currentView">
+  <div class="recipe-card" *ngFor="let recipe of recipes">
+    <div class="recipe-card__image">
+      <img [src]="recipe.image" [alt]="recipe.name">
+    </div>
+    <div class="recipe-card__content">
+      <h3 class="recipe-card__title">{{ recipe.name }}</h3>
+      <p class="recipe-card__description">{{ recipe.description }}</p>
+      
+      <div class="recipe-card__info">
+
+        <button 
+          class="ingredients-toggle"
+          (click)="toggleIngredients(recipe.id)">
+          {{ expandedRecipeId === recipe.id ? '🔼' : '🔽' }}  
+        </button>
+      </div>
+
+      <div class="ingredients-list" *ngIf="expandedRecipeId === recipe.id">
+        <h4>Ingredients:</h4>
+        <ul>
+          <li *ngFor="let ingredient of recipe.ingredients">
+            {{ ingredient }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
